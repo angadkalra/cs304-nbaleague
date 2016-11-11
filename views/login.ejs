@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel='stylesheet' href='/stylesheets/login.css'>
+  </head>
+  <body>
+    <form action="/home" method="post">
+      <% for(var i=0; i<users.length; i++) {%>
+        <input type="radio" class="users" value="<%=users[i]%>" name="user">
+        <%=users[i]%><br>   
+      <% } %>
+        <button type="submit">Login</button>
+    </form>
+  </body>
+</html>

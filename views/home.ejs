@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+  <head>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.5/css/bootstrap.min.css" integrity="sha384-AysaV+vQoT3kOAXZkl02PThvDr8HYKPZhNT5h/CXfBThSRXQ6jW5DO2ekP5ViFdi" crossorigin="anonymous">  
+  <link rel='stylesheet' href='/stylesheets/home.css'>
+  </head>
+  <body>
+    <nav class="navbar navbar-fixed-top navbar-dark bg-inverse">
+      <a class="navbar-brand" href="/admin">Administrator</a>
+      <ul class="nav navbar-nav">
+        <li class="nav-item active">
+          <a class="nav-link" href="/coach">Coaches and Managers</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/general">General Users</a>
+        </li>
+      </ul>
+    </nav>
+    <h1><%=title%></h1>
+    <h2>Welcome <u><%=user%></u> to the NBA League portal</h2>
+    <%if (user=="Manager"){%>
+	<%include manager%>
+    <%}else if (user=="Coach"){%>
+        <%include coach%>
+    <%}else if (user=="Fan/General"){%>
+        <%include fan%>
+    <%}else if (user=="Administrator"){%>
+        <%include administrator%>
+    <%}else if (user=="Player"){%>
+        <%include player%>
+    <%}%>
+
+    <button onclick="getAllPlayers()">List Players</button>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+      var socket = io.connect();
+      
+      var query = {}
+      function getAllPlayers(){
+        query["Operation"] = "SELECT";
+        query["Columns"] = "*";
+        query["Table"] = "players";
+        socket.emit('getAllPlayers', query);
+      }
+
+      socket.on('queryResults', function(results){
+	console.log("Results: "+JSON.stringify(results));
+      });
+
+      socket.on('error', function(error){
+        console.log("Error: "+JSON.stringify(error));
+      });
+    </script>
+  </body>
+</html>
