@@ -14,14 +14,38 @@
         <li class="nav-item">
           <a class="nav-link" href="/coach">Coaches and Managers</a>
         </li>
-        <li class="nav-item active">
+        <li class="nav-item">
           <a class="nav-link" href="/general">General Users</a>
         </li>
       </ul>
     </nav>
-    <h1>Error</h1>
-    <h1><%=message%></h1>
-    <h2><%=error.status%></h2>
-    <h4><%=error.stack%></h4>
+    <h1>Players</h1>
+    <table class="table table-hover">
+      <tr>
+        <th>Player ID</th>
+        <th>Player Name</th>
+        <th>Team ID</th>
+        <th>Jersey Number</th>
+        <th>Position</th>
+        <th>Suspended</th>
+        <th>Injured</th>
+        <th>Deleted</th>
+      </tr>
+      <% players.forEach(function(player) { %>
+        <tr>
+          <td><%= player.player_id %></td>
+          <td><%= player.name %></td>
+          <td><%= player.team_id %></td>
+          <td><%= player.jersey_number %></td>
+          <td><%= player.position %></td>
+          <td><%= player.suspended %></td>
+          <td><%= player.injured %></td>
+          <td><%= player.deleted %></td>
+        </tr>
+      <% }); %>
+    </table>
+    <ul>
+
+    </ul>
   </body>
 </html>
