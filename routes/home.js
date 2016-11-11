@@ -1,17 +1,22 @@
 var express = require('express');
+var db = require('../db.js');
 var router = express.Router();
 
-/* GET home page. */
-router.post('/', function(req, res, next) {
-  if(req.body.user !=null){
-    res.render('home', { title: 'NBA League Homepage', user: req.body.user});
-  }else{
-    res.redirect('login');
-  }
+router.get('/admin', function(req, res, next) {
+  res.render('admin');
 });
 
+router.get('/coach', function(req, res, next) {
+  res.render('coach');
+});
+
+router.get('/general', function(req, res, next) {
+  res.render('general');
+});
+
+// Redirect / to /admin
 router.get('/', function(req, res, next){
-  res.redirect('/');
+  res.redirect('/admin');
 });
 
 module.exports = router;
