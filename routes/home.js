@@ -17,6 +17,5 @@ router.get('/general', function(req, res, next) {
 // Redirect / to /admin
 router.get('/', function(req, res, next){
   res.redirect('/admin');
-});
 
 module.exports = router;
