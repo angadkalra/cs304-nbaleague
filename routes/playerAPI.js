@@ -8,7 +8,7 @@ var router = express.Router();
         console.log(err);
       },
       function(result) {
-        res.render('players', { players: result });
+        res.render('results', { players: result, view: "player" });
       });
   });
 
@@ -18,7 +18,7 @@ var router = express.Router();
       console.log(err);
     },
     function(result) {
-      res.render('players', { players: result });
+      res.render('results', { players: result });
     });
   });
 
@@ -28,7 +28,7 @@ var router = express.Router();
       console.log(err);
     },
     function(result) {
-      res.render('players', { players: result });
+      res.render('results', { players: result });
     });
   });
 
