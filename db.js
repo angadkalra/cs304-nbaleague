@@ -9,18 +9,22 @@ var pool      =    mysql.createPool({
   debug    :  false
  });
 
-function handleQuery(sqlQuery, callback) {
-  pool.getConnection(function(err,connection){
-    connection.query(sqlQuery ,function(err,rows){
-      connection.release();
-      if(!err) {
-        console.log("Query: "+sqlQuery+"\n");
-        callback(rows)
-      }else{
-        callback(err)
-      }
-    });
+function query(query, error, callback) {
+  pool.getConnection(function(err, connection){
+    if (err) {
+      error(err);
+    } else {
+      connection.query(query ,function(err, result){
+        connection.release();
+        if(!err) {
+          console.log("Query: " + query + "\n");
+          callback(result);
+        }else{
+          error(err);
+        }
+      });
+    }
   });
 }
 
-module.exports.handleQuery = handleQuery;
+module.exports.query = query;
