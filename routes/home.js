@@ -63,8 +63,16 @@ router.get('/logout', function(req,res,next){
 });
 
 router.get('/:role/login/:name', function(req,res,next){
-  db.query('SELECT TOP 1 name FROM ' + req.params['role'] +' WHERE name = \'' +req.params['name']+'\'', function(results){
-    if(results.length==0){
+  query = 'SELECT name FROM ' + req.params['role'] +' WHERE name = \'' +req.params['name']+'\';';
+  console.log(query);
+  db.query(query, function(error){
+    res.render('error');
+  },
+  function(results){
+    console.log(results);
+    if(results.hasOwnProperty("Error")){
+      res.render('error');	
+    }else if(results.length==0){
       res.redirect('/');
     }else{
       loggedIn=true;
@@ -72,6 +80,7 @@ router.get('/:role/login/:name', function(req,res,next){
       res.redirect('/'+permissionLevel);
     }
   });
+
 });
 
 module.exports = router;

@@ -19,6 +19,7 @@ function query(query, error, callback) {
         connection.release();
         if(!err) {
           console.log("Query: " + query + "\n");
+	        console.log(result);
           callback(result);
         } else {
           error(err);
