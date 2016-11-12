@@ -13,8 +13,22 @@ router.get('/', function(req,res,next){
     });
 });
 
+router.get('/:attributes/', function(req,res,next){
+  queryAndRoute(req,res,next);
+});  
+
+
+router.get('/:attributes/:conditions/:operators/:boundaries', function(req,res,next){
+  queryAndRoute(req,res,next);
+});  
+
+
 router.get('/:attributes/:conditions/:operators/:boundaries/:logic', function(req,res,next){
-  var query = helpers.buildSelectQuery('teams', req);
+  queryAndRoute(req, res, next);
+});  
+
+function queryAndRoute(req, res, next){
+ var query = helpers.buildSelectQuery('teams', req);
   if (query!="error"){
     db.query(query, 
       function(err){
@@ -26,6 +40,6 @@ router.get('/:attributes/:conditions/:operators/:boundaries/:logic', function(re
   }else{
     res.render('error', {error:"bad url"});
   }
-});  
+}
 
 module.exports = router;

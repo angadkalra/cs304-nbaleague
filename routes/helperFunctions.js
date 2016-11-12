@@ -1,12 +1,20 @@
 function buildSelectQuery(table, req){
   var attributes = req.params["attributes"].split('-');
-  var conditions = req.params["attributes"].split('-');
-  var operators = req.params["operators"].split('-');
-  var boundaries = req.params["boundaries"].split('-');
-  var logic = req.params["logic"].split('-'); 
-  var sqlQuery = "SELECT ";
+  
+  if("conditions" in req.params){
+    var conditions = req.params["conditions"].split('-');
+    var operators = req.params["operators"].split('-');
+    var boundaries = req.params["boundaries"].split('-');
+   
+    if(conditions.length!=operators.length || conditions.length!=boundaries.length) return "error";
+  }
 
-  if(conditions.length!=operators.length || conditions.length!=boundaries.length) return "error";
+  if("logic" in req.params){
+    var logic = req.params["logic"].split('-'); 
+  }
+
+  var sqlQuery = "SELECT ";
+	
   for (var i=0; i<attributes.length;i++){
     if (i==attributes.length-1){
       sqlQuery+=attributes[i]+" FROM "+table+" WHERE ";
