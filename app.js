@@ -6,6 +6,10 @@ var bodyParser = require('body-parser');
 var home = require('./routes/home');
 var playerAPI = require('./routes/playerAPI');
 var teamAPI = require('./routes/teamAPI');
+var fixtureAPI = require('./routes/fixtureAPI');
+var managerAPI = require('./routes/managerAPI');
+var coachAPI = require('./routes/coachAPI');
+
 var app = express();
 
 // view engine setup
@@ -23,6 +27,9 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', home);
 app.use('/players', playerAPI);
 app.use('/teams', teamAPI);
+app.use('/fixtures', fixtureAPI);
+app.use('/managers', managerAPI);
+app.use('/coaches', coachAPI);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
