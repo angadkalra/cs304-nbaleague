@@ -4,7 +4,7 @@ var router = express.Router();
 var helpers = require('./helperFunctions');
 
 router.get('/', function(req,res,next){
-  db.query('SELECT * FROM teams WHERE deleted = 0;', 
+  db.query('SELECT * FROM managers WHERE deleted = 0;', 
     function(err){
       res.render('error', {message: err.message, error: err});
     },
@@ -14,17 +14,17 @@ router.get('/', function(req,res,next){
 });
 
 router.get('/:attributes/', function(req,res,next){
-  helpers.querySelectAndRoute('teams', req,res,next);
+  helpers.querySelectAndRoute('managers', req,res,next);
 });  
 
 
 router.get('/:attributes/:conditions/:operators/:boundaries', function(req,res,next){
-  helpers.querySelectAndRoute('teams', req,res,next);
+  helpers.querySelectAndRoute('managers', req,res,next);
 });  
 
 
 router.get('/:attributes/:conditions/:operators/:boundaries/:logic', function(req,res,next){
-  helpers.querySelectAndRoute('teams', req, res, next);
+  helpers.querySelectAndRoute('managers', req, res, next);
 });  
 
 
