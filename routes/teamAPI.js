@@ -14,32 +14,19 @@ router.get('/', function(req,res,next){
 });
 
 router.get('/:attributes/', function(req,res,next){
-  queryAndRoute(req,res,next);
+  helpers.querySelectAndRoute(req,res,next);
 });  
 
 
 router.get('/:attributes/:conditions/:operators/:boundaries', function(req,res,next){
-  queryAndRoute(req,res,next);
+  helpers.querySelectAndRoute(req,res,next);
 });  
 
 
 router.get('/:attributes/:conditions/:operators/:boundaries/:logic', function(req,res,next){
-  queryAndRoute(req, res, next);
+  helpers.querySelectAndRoute(req, res, next);
 });  
 
-function queryAndRoute(req, res, next){
- var query = helpers.buildSelectQuery('teams', req);
-  if (query!="error"){
-    db.query(query, 
-      function(err){
-        res.render('error', {message: err.message, error:err});
-      },
-      function(result){
-        res.render('results', {results:result});
-      });    
-  }else{
-    res.render('error', {error:"bad url"});
-  }
-}
+
 
 module.exports = router;

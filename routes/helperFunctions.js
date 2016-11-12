@@ -1,3 +1,5 @@
+var db = require('../db');
+
 function buildSelectQuery(table, req){
   var attributes = req.params["attributes"].split('-');
   
@@ -50,4 +52,20 @@ function buildSelectQuery(table, req){
 
 }
 
+function querySelectAndRoute(req, res, next){
+ var query = buildSelectQuery('teams', req);
+  if (query!="error"){
+    db.query(query, 
+      function(err){
+        res.render('error', {message: err.message, error:err});
+      },
+      function(result){
+        res.render('results', {results:result});
+      });    
+  }else{
+    res.render('error', {error:"bad url"});
+  }
+}
+
 module.exports.buildSelectQuery = buildSelectQuery;
+module.exports.querySelectAndRoute = querySelectAndRoute;
