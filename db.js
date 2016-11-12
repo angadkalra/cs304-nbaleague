@@ -2,7 +2,7 @@ var mysql = require('mysql');
 
 var pool      =    mysql.createPool({
   connectionLimit : 100, //important
-  host     : 'localhost',
+  host     : '138.197.130.104',
   user     : 'tuple',
   password : 'three',
   database : 'nbaleague',
@@ -18,6 +18,7 @@ function query(query, error, callback) {
         connection.release();
         if(!err) {
           console.log("Query: " + query + "\n");
+	  console.log(result);
           callback(result);
         }else{
           error(err);
