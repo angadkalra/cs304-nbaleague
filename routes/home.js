@@ -61,6 +61,7 @@ router.get('/logout', function(req,res,next){
   permissionLevel = "";
   res.redirect('/');
 });
+
 router.get('/:role/login/:name', function(req,res,next){
   db.query('SELECT TOP 1 name FROM ' + req.params['role'] +' WHERE name = \'' +req.params['name']+'\'', function(results){
     if(results.length==0){
