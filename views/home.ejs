@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.5/css/bootstrap.min.css" integrity="sha384-AysaV+vQoT3kOAXZkl02PThvDr8HYKPZhNT5h/CXfBThSRXQ6jW5DO2ekP5ViFdi" crossorigin="anonymous">
+    <link rel="stylesheet" href="/stylesheets/style.css">
+   
+    <style>
+	*{text-align:center;}
+        input,#submit, #btn-wrap, h6, h2{margin-top:20px;} 
+    </style>
+ </head>
+  <body>
+    <%include navbar%>
+    <h2>Welcome to the NBA League Portal</h2>
+    <h6>Login As:</h6>
+    <div id="btn-wrap" class="btn-group btn-group-justified">
+      <button onclick="buttonClick(this.id)" id="admins" class="btn btn-xl btn-info active">League Admin</button>
+      <button onclick="buttonClick(this.id)" id="managers" class="btn btn-xl btn-info disabled">Manager</button>
+      <button onclick="buttonClick(this.id)" id="coaches" class="btn btn-xl btn-info disabled">Coach</button>
+      <button onclick="buttonClick(this.id)" id="general" class="btn btn-xl btn-info disabled">General</button>
+    </div>
+    <div class="container"> 
+      <h6>Please Enter Your Name</h6>
+      <input type="text" id="name" class="form-control" placeholder="Name" autofocus>
+      <button onclick="buttonClick(this.id)" id="submit" class="btn btn-xl btn-info">Sign in</button>
+    </div>
+
+    <script>
+      var role = "admins";
+      function buttonClick(id){
+        if(id=="submit"){
+          if(role!="general" && document.getElementById('name').value==""){
+	    alert("Please enter a name");
+          }else if(role=="general"){
+            window.location.href = '/'+role;
+          }else{
+            window.location.href = '/'+role+'/login/'+document.getElementById('name').value;
+         } 
+       }else if (id=="general"){
+	  document.getElementById('name').value = "";
+          document.getElementById('name').setAttribute('disabled', true);
+          document.getElementsByClassName('active')[0].className = 'btn btn-xl btn-info disabled';
+          document.getElementById(id).className = 'btn btn-xl btn-info active'
+
+          role = id;
+
+	}else{
+          document.getElementById('name').removeAttribute('disabled');
+          document.getElementById('name').className="form-control"
+          document.getElementsByClassName('active')[0].className = 'btn btn-xl btn-info disabled';
+          document.getElementById(id).className = 'btn btn-xl btn-info active'
+           
+          role = id;
+        }
+      }
+      
+    </script>
+  </body>
+</html>
+
