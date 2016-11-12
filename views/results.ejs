@@ -19,8 +19,24 @@
         </li>
       </ul>
     </nav>
-    <%if (view="player"){%>
-      <% include players%>
-    <%}%>
+      <% if (results.length > 0) { %>
+        <table class="table table-hover">
+          <tr>
+            <% for(var key in results[0]) { %>
+              <th><%= key %></th>
+            <% } %> 
+          </tr>
+
+          <% results.forEach(function(result) { %>
+            <tr>
+              <% Object.keys(result).forEach(function(key) { %>
+                <td><%= result[key] %></td>
+              <% }); %>
+            </tr>
+          <% }); %>
+        </table>
+      <% } else { %>
+        <h3>No results</h3>
+      <% } %>
   </body>
 </html>
