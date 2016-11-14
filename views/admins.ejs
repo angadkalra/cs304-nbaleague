@@ -1,45 +1,179 @@
 <!DOCTYPE html>
 <html>
-  <head>
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.5/css/bootstrap.min.css" integrity="sha384-AysaV+vQoT3kOAXZkl02PThvDr8HYKPZhNT5h/CXfBThSRXQ6jW5DO2ekP5ViFdi" crossorigin="anonymous">
+<head>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.5/css/bootstrap.min.css" integrity="sha384-AysaV+vQoT3kOAXZkl02PThvDr8HYKPZhNT5h/CXfBThSRXQ6jW5DO2ekP5ViFdi" crossorigin="anonymous">
   <link rel="stylesheet" href="/stylesheets/style.css">
-  </head>
-  <body>
-    <% include navbar%>
-    <div class="admin-view">
-	    <h1>Admin</h1>
-	    <div class="container">
-	    	<h4><u>View</u></h4>
-	    	<h5>Players</h5>
-	    	<h5>Coaches</h5>
-	    	<h5>Teams</h5>
-	    	<h5>Schedule</h5>
-	    	<button id="submit" onClick="" lass="btn btn-xl btn-info">Search</button>
-	    </div>
-	    <div class="container">
-	    	<h4><u>Update</u></h4>
-	    	<h5>Players</h5>
-	    	<h5>Coaches</h5>
-	    	<h5>Teams</h5>
-	    	<h5>Schedule</h5>
-	    	<button id="submit" onClick="" lass="btn btn-xl btn-info">Search</button>
-	    </div>
-	    <div class="container">
-	    	<h4><u>Insert</u></h4>
-	    	<h5>Players</h5>
-	    	<h5>Coaches</h5>
-	    	<h5>Teams</h5>
-	    	<h5>Schedule</h5>
-	    	<button id="submit" onClick="" lass="btn btn-xl btn-info">Search</button>
-	    </div>
-	    <div class="container">
-	    	<h4><u>Delete</u></h4>
-	    	<h5>Players</h5>
-	    	<h5>Coaches</h5>
-	    	<h5>Teams</h5>
-	    	<h5>Schedule</h5>
-	    	<button id="submit" onClick="" lass="btn btn-xl btn-info">Search</button>
-	    </div>
-	</div>
-  </body>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+</head>
+<body>
+  <% include navbar%>
+
+  <div class="container">
+    <h1>Admin</h1>
+
+    <h3>View Players</h3>
+
+    <form class="form" id="view-players">
+      <div class="form-check">
+        <label class="form-check-label">
+          <input class="form-check-input" type="checkbox" id="view-players-player-jersey" checked>Jersey
+        </label>
+      </div>
+      <div class="form-check">
+        <label class="form-check-label">
+          <input class="form-check-input" type="checkbox" id="view-players-player-position" checked>Position
+        </label>
+      </div>
+      <div class="form-check">
+        <label class="form-check-label">
+          <input class="form-check-input" type="checkbox" id="view-players-player-suspended" checked>Suspended
+        </label>
+      </div>
+      <div class="form-check">
+        <label class="form-check-label">
+          <input class="form-check-input" type="checkbox" id="view-players-player-injured" checked>Injured
+        </label>
+      </div>
+      <div class="form-group">
+        <input type="default" class="form-control" id="view-players-where-suspended" placeholder="Suspended">
+      </div>
+      <div class="form-group">
+        <input type="default" class="form-control" id="view-players-where-injured" placeholder="Injured">
+      </div>
+      <div class="form-check">
+        <label class="form-check-label">
+          <input class="form-check-input" type="checkbox" id="view-players-deleted">Deleted
+        </label>
+      </div>
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+
+
+    <h3>View Fixtures</h3>
+
+    <form class="form">
+      <div class="form-group">
+        <input type="default" class="form-control" id="view-fixtures-date" placeholder="Date">
+      </div>
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+
+
+    <h3>View Teams</h3>
+
+    <form class="form" id="#view-teams">
+      <div class="form-check">
+        <label class="form-check-label">
+          <input class="form-check-input" type="checkbox" id="view-teams-deleted">Deleted
+        </label>
+      </div>
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+
+    <h3>Edit Players</h3>
+    <form class="form" id="#edit-players">
+      <div class="form-group">
+        <input type="default" class="form-control" id="edit-players-team-id" placeholder="New Team ID">
+      </div>
+      <div class="form-group">
+        <input type="default" class="form-control" id="edit-players-jersey" placeholder="New Jersey Number">
+      </div>
+      <div class="form-group">
+        <input type="default" class="form-control" id="edit-players-position" placeholder="New Position">
+      </div>
+      <div class="form-check">
+        <label class="form-check-label">
+          <input class="form-check-input" type="checkbox" id="edit-players-deleted">Suspended
+        </label>
+      </div>
+      <div class="form-check">
+        <label class="form-check-label">
+          <input class="form-check-input" type="checkbox" id="edit-players-deleted">Injured
+        </label>
+      </div>
+      <div class="form-group">
+        <input type="default" class="form-control" id="edit-players-player-id" placeholder="Player ID to Change">
+      </div>
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+
+    <h3>Insert Players</h3>
+    <form class="form" id="#insert-players">
+      <div class="form-group">
+        <input type="default" class="form-control" id="insert-players-team-id" placeholder="Team ID">
+      </div>
+      <div class="form-group">
+        <input type="default" class="form-control" id="insert-players-name" placeholder="Name">
+      </div>
+      <div class="form-group">
+        <input type="default" class="form-control" id="insert-players-jersey" placeholder="Jersey Number">
+      </div>
+      <div class="form-group">
+        <input type="default" class="form-control" id="edit-players-position" placeholder="Position">
+      </div>
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+
+    <h3>Delete Players</h3>
+    <form class="form" id="#delete-players">
+      <div class="form-group">
+        <input type="default" class="form-control" id="delete-players-player-id" placeholder="Player ID to Delete">
+      </div>
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+
+  </div>
+  <script>
+  $("#view-players").submit(function(event) {
+    // TODO: Build up the url based on info from id'd inputs in the form
+    var attrs = [];
+
+    if (!$("#view-players-player-jersey:checked").val()) {
+    	attrs.push('jersey_number');
+    }
+
+    if (!$("#view-players-player-position:checked").val()) {
+    	attrs.push('position');
+    }
+
+    if (!$("#view-players-player-suspended:checked").val()) {
+    	attrs.push('suspended');
+    }
+
+    if (!$("#view-players-player-injured:checked").val()) {
+    	attrs.push('injured');
+    }
+
+    location.href = "/players/" + attrs.join('-') + "/suspended-injured/eq-eq/" + $("#view-players-where-suspended").val() 
+    	+ "-" + $("#view-players-where-suspended").val() + "/and";  
+
+    event.preventDefault();
+  });
+
+  $("#view-fixtures").submit(function(event) {
+    // TODO: Build up the url based on info from id'd inputs in the form
+    location.href = '/fixtures';
+    event.preventDefault();
+  });
+
+  $("#view-teams").submit(function(event) {
+    // TODO: Build up the url based on info from id'd inputs in the form
+    location.href = '/teams';
+    event.preventDefault();
+  });
+
+  $("#edit-players").submit(function(event) {
+    // TODO: Build up the url based on info from id'd inputs in the form
+    location.href = '/players';
+    event.preventDefault();
+  });
+
+  $("#delete-players").submit(function(event) {
+    // TODO: Build up the url based on info from id'd inputs in the form
+    location.href = '/players';
+    event.preventDefault();
+  });
+  </script>
+
+</body>
 </html>
