@@ -1,11 +1,69 @@
 <!DOCTYPE html>
 <html>
-  <head>
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.5/css/bootstrap.min.css" integrity="sha384-AysaV+vQoT3kOAXZkl02PThvDr8HYKPZhNT5h/CXfBThSRXQ6jW5DO2ekP5ViFdi" crossorigin="anonymous">
-  <link rel="stylesheet" href="/stylesheets/style.css">
-  </head>
-  <body>
+<head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.5/css/bootstrap.min.css" integrity="sha384-AysaV+vQoT3kOAXZkl02PThvDr8HYKPZhNT5h/CXfBThSRXQ6jW5DO2ekP5ViFdi" crossorigin="anonymous">
+    <link rel="stylesheet" href="/stylesheets/style.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+</head>
+<body>
     <% include navbar%>
-    <h1>General</h1>
-  </body>
+    <div class="container">
+        <h1>General</h1>
+
+        <div class="row">
+            <div class="col-md-3">
+                <h3>Close Games</h3>
+                <form class="form" id="view-close-games">
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </form>
+            </div>
+
+            <div class="col-md-3">
+                <h3>Blowouts</h3>
+                <form class="form" id="view-blowouts">
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </form>
+            </div>
+
+            <div class="col-md-3">
+                <h3>Average Scores</h3>
+                <form class="form" id="view-average-scores">
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </form>
+            </div>
+
+            <div class="col-md-3">
+                <h3>Consistent Teams</h3>
+                <form class="form" id="view-consistent-teams">
+                    <div class="form-group">
+                        <input type="default" class="form-control" id="view-consistent-teams-score" placeholder="Consistent Score">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </form>
+            </div>
+        </div> 
+    </div>
+
+    <script>
+    $("#view-close-games").submit(function(event) {
+        location.href = '/fixtures/close-games';
+        event.preventDefault();
+    });
+
+    $("#view-blowouts").submit(function(event) {
+        location.href = '/fixtures/blowouts';
+        event.preventDefault();
+    });
+
+    $("#view-average-scores").submit(function(event) {
+        location.href = '/fixtures/average-scores';
+        event.preventDefault();
+    });
+
+    $("#view-consistent-teams").submit(function(event) {
+        location.href = '/teams/consistent-teams/' + $("#view-consistent-teams-score").val();
+        event.preventDefault();
+    });
+    </script>
+</body>
 </html>

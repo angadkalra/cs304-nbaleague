@@ -41,15 +41,7 @@ router.get('/coaches', function(req, res, next) {
 });
 
 router.get('/general', function(req, res, next) {
-  if(loggedIn){
-    if(permissionLevel=="General"){
-      res.render('general');
-    }else{
-      res.redirect('/'+permissionLevel);
-    }
-  }else{
-     res.redirect('/');
-  }
+  res.render('general');
 });
 
 router.get('/', function(req, res, next){

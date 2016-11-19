@@ -11,140 +11,217 @@
   <div class="container">
     <h1>Admin</h1>
 
-    <h3>View Players</h3>
+    <div class="row">
+        <div class="col-md-4">
+        <h3>View Players</h3>
 
-    <form class="form" id="view-players">
-      <div class="form-check">
-        <label class="form-check-label">
-          <input class="form-check-input" type="checkbox" id="view-players-player-jersey" checked>Jersey
-        </label>
+        <form class="form" id="view-players">
+          <div class="form-check">
+            <label class="form-check-label">
+              <input class="form-check-input" type="checkbox" id="view-players-player-jersey" checked>Jersey
+            </label>
+          </div>
+          <div class="form-check">
+            <label class="form-check-label">
+              <input class="form-check-input" type="checkbox" id="view-players-player-position" checked>Position
+            </label>
+          </div>
+          <div class="form-check">
+            <label class="form-check-label">
+              <input class="form-check-input" type="checkbox" id="view-players-player-suspended" checked>Suspended
+            </label>
+          </div>
+          <div class="form-check">
+            <label class="form-check-label">
+              <input class="form-check-input" type="checkbox" id="view-players-player-injured" checked>Injured
+            </label>
+          </div>
+          <hr>
+          <div class="form-group">
+            <input type="default" class="form-control" id="view-players-where-suspended" placeholder="Suspended">
+          </div>
+          <div class="form-group">
+            <input type="default" class="form-control" id="view-players-where-injured" placeholder="Injured">
+          </div>
+          <div class="form-check">
+            <label class="form-check-label">
+              <input class="form-check-input" type="checkbox" id="view-players-deleted">Deleted
+            </label>
+          </div>
+          <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
       </div>
-      <div class="form-check">
-        <label class="form-check-label">
-          <input class="form-check-input" type="checkbox" id="view-players-player-position" checked>Position
-        </label>
-      </div>
-      <div class="form-check">
-        <label class="form-check-label">
-          <input class="form-check-input" type="checkbox" id="view-players-player-suspended" checked>Suspended
-        </label>
-      </div>
-      <div class="form-check">
-        <label class="form-check-label">
-          <input class="form-check-input" type="checkbox" id="view-players-player-injured" checked>Injured
-        </label>
-      </div>
-      <div class="form-group">
-        <input type="default" class="form-control" id="view-players-where-suspended" placeholder="Suspended">
-      </div>
-      <div class="form-group">
-        <input type="default" class="form-control" id="view-players-where-injured" placeholder="Injured">
-      </div>
-      <div class="form-check">
-        <label class="form-check-label">
-          <input class="form-check-input" type="checkbox" id="view-players-deleted">Deleted
-        </label>
-      </div>
-      <button type="submit" class="btn btn-primary">Submit</button>
-    </form>
 
-    <h3>View Teams</h3>
+      <div class="col-md-4">
+        <h3>View Fixtures</h3>
 
-    <form class="form" id="#view-teams">
-    	<div class="form-group">
-        	<input type="default" class="form-control" id="view-teams-team-name" placeholder="Name">
-      	</div>
-	      <div class="form-check">
-	        <label class="form-check-label">
-	          <input class="form-check-input" type="checkbox" id="view-teams-deleted">Deleted
-	        </label>
-	      </div>
-	      <button type="submit" class="btn btn-primary">Submit</button>
-    </form>
+        <form class="form" id="view-fixtures">
+          <div class="form-group">
+            <input type="default" class="form-control" id="view-fixtures-fixture-date" placeholder="Date">
+          </div>
+          <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+      </div>
 
-    <h3>View Coaches</h3>
+      <div class="col-md-4">
+        <h3>View Teams</h3>
 
-    <form class="form" id="#view-coaches">
-    	<div class="form-group">
-        	<input type="default" class="form-control" id="view-coaches-coach-name" placeholder="Name">
-      	</div>
-	      <div class="form-check">
-	        <label class="form-check-label">
-	          <input class="form-check-input" type="checkbox" id="view-coaches-deleted">Deleted
-	        </label>
-	      </div>
-	      <button type="submit" class="btn btn-primary">Submit</button>
-    </form>
+        <form class="form" id="view-teams">
+          <div class="form-check">
+            <label class="form-check-label">
+              <input class="form-check-input" type="checkbox" id="view-teams-deleted">Deleted
+            </label>
+          </div>
+          <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+      </div>
 
-    <h3>View Managers</h3>
+    </div>
 
-    <form class="form" id="#view-managers">
-    	<div class="form-group">
-        	<input type="default" class="form-control" id="view-managers-manager-name" placeholder="Name">
-      	</div>
-	      <div class="form-check">
-	        <label class="form-check-label">
-	          <input class="form-check-input" type="checkbox" id="view-managers-deleted">Deleted
-	        </label>
-	      </div>
-	      <button type="submit" class="btn btn-primary">Submit</button>
-    </form>
+    <hr>
 
-    <h3>View Fixtures</h3>
+    <div class="row">
+      <div class="col-md-4">
+        <h3>View Coaches</h3>
 
-    <form class="form">
-      <div class="form-group">
-        <input type="default" class="form-control" id="view-fixtures-fixture-date" placeholder="Date">
+        <form class="form" id="view-coaches">
+          <div class="form-check">
+            <label class="form-check-label">
+              <input class="form-check-input" type="checkbox" id="view-coaches-deleted">Deleted
+            </label>
+          </div>
+          <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
       </div>
-      <button type="submit" class="btn btn-primary">Submit</button>
-    </form>
 
-    <h3>Edit Players</h3>
-    <form class="form" id="#edit-players">
-      <div class="form-group">
-        <input type="default" class="form-control" id="edit-players-team-id" placeholder="New Team ID">
-      </div>
-      <div class="form-group">
-        <input type="default" class="form-control" id="edit-players-jersey" placeholder="New Jersey Number">
-      </div>
-      <div class="form-group">
-        <input type="default" class="form-control" id="edit-players-position" placeholder="New Position">
-      </div>
-      <div class="form-check">
-        <label class="form-check-label">
-          <input class="form-check-input" type="checkbox" id="edit-players-deleted">Suspended
-        </label>
-      </div>
-      <div class="form-check">
-        <label class="form-check-label">
-          <input class="form-check-input" type="checkbox" id="edit-players-deleted">Injured
-        </label>
-      </div>
-      <div class="form-group">
-        <input type="default" class="form-control" id="edit-players-player-id" placeholder="Player ID to Change">
-      </div>
-      <button type="submit" class="btn btn-primary">Submit</button>
-    </form>
+      <div class="col-md-4">
+        <h3>View Managers</h3>
 
-    <h3>Update Fixtures</h3>
-    <form class="form" id="#update-fixtures">
-      <div class="form-group">
-        <input type="default" class="form-control" id="update-fixtures-date" placeholder="Date">
+        <form class="form" id="view-managers">
+          <div class="form-check">
+            <label class="form-check-label">
+              <input class="form-check-input" type="checkbox" id="view-managers-deleted">Deleted
+            </label>
+          </div>
+          <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
       </div>
-      <div class="form-group">
-        <input type="default" class="form-control" id="update-fixtures-hometeam-id" placeholder="Home Team ID">
+    </div>
+
+    <hr>
+
+    <div class="row">
+      <div class="col-md-4">
+        <h3>Add Player</h3>
       </div>
-      <div class="form-group">
-        <input type="default" class="form-control" id="update-fixtures-awayteam-id" placeholder="Away Team ID">
+      <div class="col-md-4">
+        <h3>Add Fixture</h3>
       </div>
-      <div class="form-group">
-        <input type="default" class="form-control" id="update-fixtures-hometeam-score" placeholder="Home Team Score">
+      <div class="col-md-4">
+        <h3>Add Team</h3>
       </div>
-      <div class="form-group">
-        <input type="default" class="form-control" id="update-fixtures-awayteam-score" placeholder="Away Team Score">
+    </div>
+
+    <hr>
+
+    <div class="row">
+      <div class="col-md-4">
+        <h3>Add Manager</h3>
       </div>
-      <button type="submit" class="btn btn-primary">Submit</button>
-    </form>
+      <div class="col-md-4">
+        <h3>Add Coach</h3>
+      </div>
+    </div>
+
+    <hr>
+
+    <div class="row">
+      <div class="col-md-4">
+        <h3>Update Players</h3>
+        <form class="form" id="edit-players">
+          <div class="form-group">
+            <input type="default" class="form-control" id="edit-players-team-id" placeholder="New Team ID">
+          </div>
+          <div class="form-group">
+            <input type="default" class="form-control" id="edit-players-jersey" placeholder="New Jersey Number">
+          </div>
+          <div class="form-group">
+            <input type="default" class="form-control" id="edit-players-position" placeholder="New Position">
+          </div>
+          <div class="form-check">
+            <label class="form-check-label">
+              <input class="form-check-input" type="checkbox" id="edit-players-deleted">Suspended
+            </label>
+          </div>
+          <div class="form-check">
+            <label class="form-check-label">
+              <input class="form-check-input" type="checkbox" id="edit-players-deleted">Injured
+            </label>
+          </div>
+          <div class="form-group">
+            <input type="default" class="form-control" id="edit-players-player-id" placeholder="Player ID to Change">
+          </div>
+          <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+      </div>
+      <div class="col-md-4">
+        <h3>Update Fixtures</h3>
+        <form class="form" id="#update-fixtures">
+          <div class="form-group">
+            <input type="default" class="form-control" id="update-fixtures-date" placeholder="Date">
+          </div>
+          <div class="form-group">
+            <input type="default" class="form-control" id="update-fixtures-hometeam-id" placeholder="Home Team ID">
+          </div>
+          <div class="form-group">
+            <input type="default" class="form-control" id="update-fixtures-awayteam-id" placeholder="Away Team ID">
+          </div>
+          <div class="form-group">
+            <input type="default" class="form-control" id="update-fixtures-hometeam-score" placeholder="Home Team Score">
+          </div>
+          <div class="form-group">
+            <input type="default" class="form-control" id="update-fixtures-awayteam-score" placeholder="Away Team Score">
+          </div>
+          <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+      </div>
+      <div class="col-md-4">
+        <h3>// TODO: Do we want to add more?</h3>
+      </div>
+    </div>
+
+    <hr>
+    
+    <div class="row">
+        <div class="col-md-4">
+            <h3>Delete Player</h3>
+            <form class="form" id="#delete-players">
+              <div class="form-group">
+                <input type="default" class="form-control" id="delete-players-player-id" placeholder="Player ID to Delete">
+              </div>
+              <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+        </div>
+
+        <div class="col-md-4">
+            <h3>Delete Fixture</h3>
+            <form class="form" id="#delete-fixture">
+              <div class="form-group">
+                <input type="default" class="form-control" id="delete-fixture-date" placeholder="Date">
+              </div>
+              <div class="form-group">
+                <input type="default" class="form-control" id="delete-fixture-hometeam-id" placeholder="Home Team ID">
+              </div>
+              <div class="form-group">
+                <input type="default" class="form-control" id="delete-fixture-awayteam-id" placeholder="Away Team ID">
+              </div>
+              <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+        </div>
+
+        <div class="col-md-4">
+        </div>
+    </div>
 
     <!--<h3>Insert Players</h3>
     <form class="form" id="#insert-players">
@@ -162,29 +239,6 @@
       </div>
       <button type="submit" class="btn btn-primary">Submit</button>
     </form>-->
-
-    <h3>Delete Player</h3>
-    <form class="form" id="#delete-players">
-      <div class="form-group">
-        <input type="default" class="form-control" id="delete-players-player-id" placeholder="Player ID to Delete">
-      </div>
-      <button type="submit" class="btn btn-primary">Submit</button>
-    </form>
-
-    <h3>Delete Fixture</h3>
-    <form class="form" id="#delete-fixture">
-      <div class="form-group">
-        <input type="default" class="form-control" id="delete-fixture-date" placeholder="Date">
-      </div>
-      <div class="form-group">
-        <input type="default" class="form-control" id="delete-fixture-hometeam-id" placeholder="Home Team ID">
-      </div>
-      <div class="form-group">
-        <input type="default" class="form-control" id="delete-fixture-awayteam-id" placeholder="Away Team ID">
-      </div>
-      <button type="submit" class="btn btn-primary">Submit</button>
-    </form>
-
   </div>
   <script>
   $("#view-players").submit(function(event) {
@@ -222,13 +276,41 @@
 
   $("#view-fixtures").submit(function(event) {
     // TODO: Build up the url based on info from id'd inputs in the form
-    location.href = '/fixtures';
+    if ($("#view-fixtures-fixture-date").val() == "") {
+        location.href = '/fixtures';
+    } else {
+        location.href = '/fixtures/' + $("#view-fixtures-fixture-date").val();
+    }
     event.preventDefault();
   });
 
   $("#view-teams").submit(function(event) {
-    // TODO: Build up the url based on info from id'd inputs in the form
-    location.href = '/teams';
+    if ($("#view-teams-deleted:checked").val()) {
+        location.href = '/teams/include-deleted'
+    } else {
+        location.href = '/teams';
+    }
+
+    event.preventDefault();
+  });
+
+  $("#view-coaches").submit(function(event) {
+    if ($("#view-coaches-deleted:checked").val()) {
+        location.href = '/coaches/include-deleted'
+    } else {
+        location.href = '/coaches';
+    }
+
+    event.preventDefault();
+  });
+
+  $("#view-managers").submit(function(event) {
+    if ($("#view-managers-deleted:checked").val()) {
+        location.href = '/managers/include-deleted'
+    } else {
+        location.href = '/managers';
+    }
+
     event.preventDefault();
   });
 
