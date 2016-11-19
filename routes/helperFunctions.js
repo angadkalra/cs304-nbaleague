@@ -52,7 +52,6 @@ function buildSelectQuery(table, req){
 
 }
 
-
 function querySelectAndRoute(table, req, res, next){
  var query = buildSelectQuery(table, req);
   if (query!="error"){
