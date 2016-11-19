@@ -12,32 +12,42 @@ router.get('/', function(req, res, next) {
     });
 });
 
-router.get('/player/:attr/:cond/:op/:val', function(req, res, next) {
-  var op = "=";
-  switch (req.params.op) {
-    case "gt":
-      op = ">";
-      break;
-    case "gte":
-      op = ">=";
-      break;
-    case "lt":
-      op = "<";
-      break;
-    case "lte":
-      op = "<=";
-      break;
-    case "neq":
-      op = "!=";
-      break;
-    case "eq":
-      op = "=";
-      break;
-    default:
-      op = "";
-    }
+router.get('/:attributes/:conditions/:operators/:constraints/:logic', function(req, res, next) {
 
-  db.query("SELECT " + req.params.attr + " FROM players WHERE " + req.params.cond + op + req.params.val + ";",
+  // these are the attributes we don't want to include in query
+  var attributes = req.params["attributes"].split('-');
+  
+  if("conditions" in req.params){
+    var conditions = req.params["conditions"].split('-');
+    var operators = req.params["operators"].split('-');
+    var constraints = req.params["constraints"].split('-');
+   
+    if(conditions.length != operators.length || conditions.length != constraints.length) 
+      return "error";
+  }
+
+  if("logic" in req.params){
+    var logic = req.params["logic"].split('-'); 
+  }
+
+  attributes = attributes.join(", ");
+
+  var sqlQuery = (attributes.length == 0) ? "SELECT name FROM players WHERE " : 
+    "SELECT name, " + attributes + " FROM players WHERE ";
+
+  for (var i = 0; i < operators.length; i++) {
+    if (operators[i] == "eq")
+      operators[i] = "=";
+
+    if(i == conditions.length - 1) {
+      sqlQuery += conditions[i] + operators[i] + constraints[i] + ";";
+    }
+    else {
+      sqlQuery += conditions[i] + operators[i] + constraints[i] + " " + logic[i] + " ";
+    }
+  }
+
+  db.query(sqlQuery,
     function(err) {
       console.log(err);
     },

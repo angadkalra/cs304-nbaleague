@@ -191,24 +191,26 @@
     // TODO: Build up the url based on info from id'd inputs in the form
     var attrs = [];
 
-    if (!$("#view-players-player-jersey:checked").val()) {
+    if ($("#view-players-player-jersey:checked").val()) {
     	attrs.push('jersey_number');
     }
 
-    if (!$("#view-players-player-position:checked").val()) {
+    if ($("#view-players-player-position:checked").val()) {
     	attrs.push('position');
     }
 
-    if (!$("#view-players-player-suspended:checked").val()) {
+    if ($("#view-players-player-suspended:checked").val()) {
     	attrs.push('suspended');
     }
 
-    if (!$("#view-players-player-injured:checked").val()) {
+    if ($("#view-players-player-injured:checked").val()) {
     	attrs.push('injured');
     }
 
-    location.href = "/players/" + attrs.join('-') + "/suspended-injured/eq-eq/" + $("#view-players-where-suspended").val() 
-    	+ "-" + $("#view-players-where-suspended").val() + "/and";  
+    var suspendedVal = ($("#view-players-where-suspended").val() == "1") ? $("#view-players-where-suspended").val() : "0";
+    var injuredVal = ($("#view-players-where-injured").val() == "1") ? $("#view-players-where-injured").val() : "0";
+
+    location.href = "/players/" + attrs.join('-') + "/suspended-injured/eq-eq/" + suspendedVal + "-" + injuredVal + "/and";  
 
     event.preventDefault();
   });
