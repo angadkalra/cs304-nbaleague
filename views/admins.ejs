@@ -207,10 +207,15 @@
     	attrs.push('injured');
     }
 
+    if (attrs.length == 0)
+      attrs = "-";
+    else
+      attrs = attrs.join("-");
+
     var suspendedVal = ($("#view-players-where-suspended").val() == "1") ? $("#view-players-where-suspended").val() : "0";
     var injuredVal = ($("#view-players-where-injured").val() == "1") ? $("#view-players-where-injured").val() : "0";
 
-    location.href = "/players/" + attrs.join('-') + "/suspended-injured/eq-eq/" + suspendedVal + "-" + injuredVal + "/and";  
+    location.href = "/players/" + attrs + "/suspended-injured/eq-eq/" + suspendedVal + "-" + injuredVal + "/and";  
 
     event.preventDefault();
   });

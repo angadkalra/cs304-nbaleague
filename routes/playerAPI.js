@@ -14,7 +14,7 @@ router.get('/', function(req, res, next) {
 
 router.get('/:attributes/:conditions/:operators/:constraints/:logic', function(req, res, next) {
 
-  // these are the attributes we don't want to include in query
+  // these are the attributes we want to include in query
   var attributes = req.params["attributes"].split('-');
   
   if("conditions" in req.params){
@@ -30,10 +30,8 @@ router.get('/:attributes/:conditions/:operators/:constraints/:logic', function(r
     var logic = req.params["logic"].split('-'); 
   }
 
-  attributes = attributes.join(", ");
-
-  var sqlQuery = (attributes.length == 0) ? "SELECT name FROM players WHERE " : 
-    "SELECT name, " + attributes + " FROM players WHERE ";
+  var sqlQuery = (attributes.length == 2 && attributes[1] == "") ? "SELECT name FROM players WHERE " : 
+    "SELECT name, " + attributes.join(", ") + " FROM players WHERE ";
 
   for (var i = 0; i < operators.length; i++) {
     if (operators[i] == "eq")
