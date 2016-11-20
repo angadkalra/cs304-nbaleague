@@ -54,4 +54,47 @@ router.get('/:attributes/:conditions/:operators/:constraints/:logic', function(r
     });
 });
 
+router.get('/update/:teamID/:playerID/:jerseyNum/:position/:suspended/:injured', function(req, res, next) {
+  var teamID = (req.params["teamID"] == "tid:") ? "" : req.params["teamID"].substr(4);
+  var jerseyNum = (req.params["jerseyNum"] == "jn:") ? "" : req.params["jerseyNum"].substr(3);
+  var position = (req.params["position"] == "pos:") ? "" : req.params["position"].substr(4);
+  var suspended = (req.params["suspended"] == "sus:") ? "" : req.params["suspended"].substr(4);
+  var injured = (req.params["injured"] == "inj:") ? "" : req.params["injured"].substr(4);
+
+  var playerID = req.params["playerID"].substr(4);
+
+  var sqlQuery = "UPDATE players SET ";
+  sqlQuery = (teamID == "") ? sqlQuery : sqlQuery + 'team_id = ' + teamID + ', ';
+  sqlQuery = (jerseyNum == "") ? sqlQuery : sqlQuery + 'jersey_number = ' + jerseyNum + ', ';
+  sqlQuery = (position == "") ? sqlQuery : sqlQuery + 'position = ' + position + ', ';
+  sqlQuery = (suspended == "") ? sqlQuery : sqlQuery + 'suspended = ' + suspended + ', ';
+  sqlQuery = (injured == "") ? sqlQuery : sqlQuery + 'injured = ' + injured + ', ';
+
+  if (sqlQuery.charAt(sqlQuery.length - 2) == ',')
+    sqlQuery = sqlQuery.substr(0, sqlQuery.length - 2);
+
+  sqlQuery = sqlQuery + ' WHERE player_id = ' + playerID + ';';
+
+  console.log(sqlQuery);
+
+  db.query(sqlQuery, 
+    function(err) {
+      console.log(err);
+    },
+    function(result) {
+      return;
+    }
+  );
+
+  db.query('select * from players;',
+    function(err) {
+      console.log(err);
+    },
+    function(result) {
+      res.render('results', { results: result });
+    }
+  );
+
+});
+
 module.exports = router;
