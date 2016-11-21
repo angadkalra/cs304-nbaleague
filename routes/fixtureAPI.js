@@ -67,4 +67,23 @@ router.get('/delete/:date/:home_team_id/:away_team_id', function(req, res, next)
 });
 
 
+router.get('/blowouts', function(req, res, next) {
+  db.query("SELECT * FROM results WHERE ABS(home_score-away_score) = (SELECT MAX(ABS(home_score-away_score)) FROM results);",
+    function(err) {
+      res.render('error', { message: err.message, error: err });
+    },
+    function(result) {
+      res.render('results', { results: result });
+    });
+});
+
+router.get('/close-games', function(req, res, next) {
+  db.query("SELECT * FROM results WHERE ABS(home_score-away_score) = (SELECT MIN(ABS(home_score-away_score)) FROM results);",
+    function(err) {
+      res.render('error', { message: err.message, error: err });
+    },
+    function(result) {
+      res.render('results', { results: result });
+    });
+});
 module.exports = router;
