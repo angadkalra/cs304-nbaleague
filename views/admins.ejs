@@ -112,25 +112,25 @@
 
     <div class="row">
       <div class="col-md-4">
-        <h3>Add Player (TODO)</h3>
+        <h3>Add Player</h3>
         <form class="form" id="#add-player">
           <div class="form-group">
-            <input type="default" class="form-control" id="insert-player-team-id" placeholder="Team ID">
+            <input type="default" class="form-control" id="add-player-team-id" placeholder="Team ID">
           </div>
           <div class="form-group">
-            <input type="default" class="form-control" id="insert-player-name" placeholder="Name">
+            <input type="default" class="form-control" id="add-player-name" placeholder="Name">
           </div>
           <div class="form-group">
-            <input type="default" class="form-control" id="insert-player-jersey" placeholder="Jersey Number">
+            <input type="default" class="form-control" id="add-player-jersey" placeholder="Jersey Number">
           </div>
           <div class="form-group">
-            <input type="default" class="form-control" id="insert-player-position" placeholder="Position">
+            <input type="default" class="form-control" id="add-player-position" placeholder="Position">
           </div>
           <button type="submit" class="btn btn-primary">Submit</button>
         </form>
       </div>
       <div class="col-md-4">
-        <h3>Add Fixture (TODO)</h3>
+        <h3>Add Fixture</h3>
         <form class="form" id="#add-fixture">
           <div class="form-group">
             <input type="default" class="form-control" id="add-fixture-date" placeholder="Date">
@@ -310,16 +310,16 @@
       event.preventDefault();
   });
 
-  $("#insert-player-team-id").prop('required', true);
-  $("#insert-player-name").prop('required', true);
-  $("#insert-player-jersey").prop('required', true);
-  $("#insert-player-position").prop('required', true);
+  $("#add-player-team-id").prop('required', true);
+  $("#add-player-name").prop('required', true);
+  $("#add-player-jersey").prop('required', true);
+  $("#add-player-position").prop('required', true);
 
   $("#add-player").submit(function(event) {
-      var teamID = $("#insert-player-team-id").val();
-      var name = $("#insert-player-name").val();
-      var jersey_number = $("#insert-player-jersey").val();
-      var position = $("#insert-player-position").val();
+      var teamID = $("#add-player-team-id").val();
+      var name = $("#add-player-name").val();
+      var jersey_number = $("#add-player-jersey").val();
+      var position = $("#add-player-position").val();
       
       location.href = '/players/add/' + teamID + '/' + name + '/' + jersey_number + '/' + position;
 
@@ -343,15 +343,16 @@
       + awayScore;
   });
 
-  $("#add-fixture").submit(function(event) {
-    var date = $("#update-fixtures-date").val();
-    var homeTeamID = $("#update-fixtures-hometeam-id").val();
-    var awayTeamID = $("#update-fixtures-awayteam-id").val();
-    var homeScore = $("#update-fixtures-hometeam-score").val();
-    var awayScore = $("#update-fixtures-awayteam-score").val();
+  $("#add-fixture-date").prop('required',true);
+  $("#add-fixture-hometeam-id").prop('required',true);
+  $("#add-fixture-awayteam-id").prop('required',true);
 
-    location.href = '/fixtures/result/edit/' + date + '/' + homeTeamID + '/' + awayTeamID + '/' + homeScore + '/'
-      + awayScore;
+  $("#add-fixture").submit(function(event) {
+    var date = $("#add-fixture-date").val();
+    var homeTeamID = $("#add-fixture-hometeam-id").val();
+    var awayTeamID = $("#add-fixture-awayteam-id").val();
+
+    location.href = '/fixtures/add/' + date + '/' + homeTeamID + '/' + awayTeamID;
   });
 
   </script>

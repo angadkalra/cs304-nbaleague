@@ -82,16 +82,7 @@ router.get('/update/:teamID/:playerID/:jerseyNum/:position/:suspended/:injured',
       console.log(err);
     },
     function(result) {
-      return;
-    }
-  );
-
-  db.query('select * from players;',
-    function(err) {
-      console.log(err);
-    },
-    function(result) {
-      res.render('results', { results: result });
+      res.redirect('/players');
     }
   );
 
@@ -110,16 +101,7 @@ router.get('/add/:teamID/:name/:jerseyNum/:position', function(req, res, next) {
       console.log(err);
     },
     function(result) {
-      return;
-    }
-  );
-
-  db.query('select * from players;',
-    function(err) {
-      console.log(err);
-    },
-    function(result) {
-      res.render('results', { results: result });
+      res.redirect('/players');
     }
   );
 
