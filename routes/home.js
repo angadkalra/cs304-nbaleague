@@ -6,37 +6,13 @@ var permissionLevel = "";
 
 router.get('/admins', function(req, res, next) {
   if(loggedIn){
-    if(permissionLevel == "admins"){
+    if(permissionLevel!="general"){
       res.render('admins');}
     else{
       res.redirect('/'+permissionLevel);
     }
   }else{
     res.redirect('/');
-  }
-});
-
-router.get('/managers', function(req, res, next) {
-  if(loggedIn){
-    if(permissionLevel=="managers"){
-      res.render('managers');
-    }else{
-      res.redirect('/'+permissionLevel);
-    }
-  }else{
-    res.redirect('/');
-  }
-});
-
-router.get('/coaches', function(req, res, next) {
-  if(loggedIn){
-    if(permissionLevel=="coaches"){
-      res.render('coaches');
-    }else{
-      res.redirect('/'+permissionLevel);
-    }
-  }else{
-     res.redirect('/');
   }
 });
 
