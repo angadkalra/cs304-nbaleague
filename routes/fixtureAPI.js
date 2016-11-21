@@ -55,34 +55,15 @@ router.get('/result/edit/:date/:home_team_id/:away_team_id/:home_score/:away_sco
     });
 });
 
-router.get('/blowouts', function(req, res, next) {
-  db.query("SELECT * FROM results WHERE ABS(home_score-away_score) = (SELECT MAX(ABS(home_score-away_score)) FROM results);",
-    function(err) {
-      res.render('error', { message: err.message, error: err });
-    },
-    function(result) {
-      res.render('results', { results: result });
-    });
-});
-
-router.get('/close-games', function(req, res, next) {
-  db.query("SELECT * FROM results WHERE ABS(home_score-away_score) = (SELECT MIN(ABS(home_score-away_score)) FROM results);",
-    function(err) {
-      res.render('error', { message: err.message, error: err });
-    },
-    function(result) {
-      res.render('results', { results: result });
-    });
-});
-
-router.get('/average-scores', function(req, res, next) {
-  db.query("SELECT teams.team_id, teams.name, averages.average FROM teams, (SELECT AVG(score) as average, id FROM (SELECT home_team_id as id, home_score as score FROM results UNION ALL SELECT away_team_id, away_score as score FROM results) as scores GROUP BY id) as averages WHERE teams.team_id=averages.id;",
-    function(err) {
-      res.render('error', { message: err.message, error: err });
-    },
-    function(result) {
-      res.render('results', { results: result });
-    });
+router.get('/delete/:date/:home_team_id/:away_team_id', function(req, res, next) {
+  db.query("DELETE FROM team_plays_team "+
+           "WHERE date = '"+req.params.date+"' "+
+	   "AND home_team_id = " + req.params.home_team_id + " "+
+           "AND away_team_id = " + req.params.away_team_id,
+           error,
+           function(result) {
+             res.redirect('/fixtures');
+           });
 });
 
 
