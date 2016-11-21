@@ -56,5 +56,17 @@ router.get('/result/edit/:date/:home_team_id/:away_team_id/:home_score/:away_sco
     });
 });
 
+router.get('/delete/:date/:home_team_id/:away_team_id', function(req, res, next) {
+  db.query("DELETE FROM team_plays_team "+
+           "WHERE date = '"+req.params.date+"' "+
+	   "AND home_team_id = " + req.params.home_team_id + " "+
+           "AND away_team_id = " + req.params.away_team_id,
+           error,
+           function(result) {
+             res.redirect('/fixtures');
+           });
+});
+
+
 
 module.exports = router;
