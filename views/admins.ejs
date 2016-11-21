@@ -201,7 +201,7 @@
     </div>
 
     <hr>
-    
+
     <div class="row">
         <div class="col-md-4">
             <h3>Delete Player</h3>
@@ -259,7 +259,7 @@
     var suspendedVal = ($("#view-players-where-suspended").val() == "1") ? $("#view-players-where-suspended").val() : "0";
     var injuredVal = ($("#view-players-where-injured").val() == "1") ? $("#view-players-where-injured").val() : "0";
 
-    location.href = "/players/" + attrs + "/suspended-injured/eq-eq/" + suspendedVal + "-" + injuredVal + "/and";  
+    location.href = "/players/" + attrs + "/suspended-injured/eq-eq/" + suspendedVal + "-" + injuredVal + "/and";
 
     event.preventDefault();
   });
@@ -313,7 +313,7 @@
       var position = $("#edit-players-position").val();
       var isSuspended = ($("#edit-players-suspended:checked").val()) ? "1" : "0";
       var isInjured = ($("#edit-players-injured:checked").val()) ? "1" : "0";
-      
+
       location.href = '/players/update/tid:' + teamID + '/pid:' + playerID + '/jn:' + jersey_number + '/pos:' + position
         + '/sus:' + isSuspended + '/inj:' + isInjured;
 

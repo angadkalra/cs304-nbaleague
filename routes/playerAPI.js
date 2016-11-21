@@ -16,21 +16,21 @@ router.get('/:attributes/:conditions/:operators/:constraints/:logic', function(r
 
   // these are the attributes we want to include in query
   var attributes = req.params["attributes"].split('-');
-  
+
   if("conditions" in req.params){
     var conditions = req.params["conditions"].split('-');
     var operators = req.params["operators"].split('-');
     var constraints = req.params["constraints"].split('-');
-   
-    if(conditions.length != operators.length || conditions.length != constraints.length) 
+
+    if(conditions.length != operators.length || conditions.length != constraints.length)
       return "error";
   }
 
   if("logic" in req.params){
-    var logic = req.params["logic"].split('-'); 
+    var logic = req.params["logic"].split('-');
   }
 
-  var sqlQuery = (attributes.length == 2 && attributes[1] == "") ? "SELECT name FROM players WHERE " : 
+  var sqlQuery = (attributes.length == 2 && attributes[1] == "") ? "SELECT name FROM players WHERE " :
     "SELECT name, " + attributes.join(", ") + " FROM players WHERE ";
 
   for (var i = 0; i < operators.length; i++) {
@@ -47,7 +47,7 @@ router.get('/:attributes/:conditions/:operators/:constraints/:logic', function(r
 
   db.query(sqlQuery,
     function(err) {
-      console.log(err);
+      res.render('error', { message: err.message, error: err });
     },
     function(result) {
       res.render('results', { results: result });
@@ -77,24 +77,14 @@ router.get('/update/:teamID/:playerID/:jerseyNum/:position/:suspended/:injured',
 
   console.log(sqlQuery);
 
-  db.query(sqlQuery, 
+  db.query(sqlQuery,
     function(err) {
-      console.log(err);
+      res.render('error', { message: err.message, error: err });
     },
     function(result) {
-      return;
+      res.redirect('/players');
     }
   );
-
-  db.query('select * from players;',
-    function(err) {
-      console.log(err);
-    },
-    function(result) {
-      res.render('results', { results: result });
-    }
-  );
-
 });
 
 module.exports = router;
