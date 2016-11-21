@@ -97,4 +97,32 @@ router.get('/update/:teamID/:playerID/:jerseyNum/:position/:suspended/:injured',
 
 });
 
+router.get('/add/:teamID/:name/:jerseyNum/:position', function(req, res, next) {
+  var teamID = req.params["teamID"];
+  var name = req.params["name"];
+  var jerseyNum = req.params["jerseyNum"];
+  var position = req.params["position"];
+
+  var sqlQuery = "INSERT INTO players VALUES (" + teamID + ',' + name + ',' + jerseyNum + ',' + position + ');';
+ 
+  db.query(sqlQuery, 
+    function(err) {
+      console.log(err);
+    },
+    function(result) {
+      return;
+    }
+  );
+
+  db.query('select * from players;',
+    function(err) {
+      console.log(err);
+    },
+    function(result) {
+      res.render('results', { results: result });
+    }
+  );
+
+});
+
 module.exports = router;
