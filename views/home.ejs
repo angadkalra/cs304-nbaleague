@@ -32,9 +32,9 @@
           if(role!="general" && document.getElementById('name').value==""){
 	    alert("Please enter a name");
           }else if(role=="general"){
-            window.location.href = '/'+role;
+            window.location.href = '/general';
           }else{
-            window.location.href = '/'+role+'/login/'+document.getElementById('name').value;
+            window.location.href = '/adminPage/'+role+'/'+document.getElementById('name').value;
           } 
         }else if (id=="general"){
 	  document.getElementById('name').value = "";
