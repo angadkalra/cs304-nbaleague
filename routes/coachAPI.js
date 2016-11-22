@@ -3,7 +3,7 @@ var db = require('../db');
 var router = express.Router();
 
 router.get('/', function(req, res, next) {
-  var query = 'SELECT * FROM coaches WHERE deleted != 1;';
+  var query = 'SELECT * FROM coaches;';
 
   db.query(query,
     function(err){
