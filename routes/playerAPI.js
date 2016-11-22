@@ -5,7 +5,7 @@ var router = express.Router();
 router.get('/', function(req, res, next) {
   db.query("SELECT * FROM players;",
     function(err) {
-      console.log(err);
+      res.render("error", {message: err.message, error: err});
     },
     function(result) {
       res.render('results', { results: result });
@@ -47,7 +47,7 @@ router.get('/view/:attributes/:conditions/:operators/:constraints/:logic', funct
 
   db.query(sqlQuery,
     function(err) {
-      console.log(err);
+      res.render("error", {message: err.message, error: err});
     },
     function(result) {
       res.render('results', { results: result });
@@ -79,7 +79,7 @@ router.get('/update/:teamID/:playerID/:jerseyNum/:position/:suspended/:injured',
 
   db.query(sqlQuery, 
     function(err) {
-      console.log(err);
+      res.render("error", {message: err.message, error: err});
     },
     function(result) {
       res.redirect('/players');
@@ -99,7 +99,7 @@ router.get('/add/:teamID/:name/:jerseyNum/:position', function(req, res, next) {
  
   db.query(sqlQuery, 
     function(err) {
-      console.log(err);
+      res.render("error", {message: err.message, error: err});
     },
     function(result) {
       res.redirect('/players');
@@ -113,7 +113,7 @@ router.get('/delete/:playerID', function(req, res, next) {
 
   db.query("delete from players where player_id = " + playerID + ";",
     function(err) {
-      console.log(err);
+      res.render("error", {message: err.message, error: err});
     },
     function(result) {
       res.redirect('/players');
