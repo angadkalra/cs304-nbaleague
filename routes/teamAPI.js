@@ -61,24 +61,24 @@ router.get('/consistent-teams/:logic/:score', function(req,res,next){
     });
 });
 
-router.get('/averages', function(req, res, next){
-  db.query('SELECT teams.name AS name, averages.average AS average FROM teams, '+
+router.get('/averages', function(req,res,next){
+  db.query('SELECT teams.team_id, teams.name, averages.average FROM teams, '+
            '('+
-	     'SELECT AVG(score) AS average, id FROM'+
-	     '('+
-	       'SELECT home_team_id AS id, home_score AS score FROM results '+
-	       'UNION ALL '+
-	       'SELECT away_team_id AS id, away_score AS score FROM results WHERE '+
-	     ') AS scores '+
-	     'GROUP BY id '+
-	   ') AS averages '+
-	   'WHERE teams.team_id=averages.id;',
+       'SELECT AVG(score) AS average, id FROM'+
+       '('+
+         'SELECT home_team_id AS id, home_score AS score FROM results '+
+         'UNION ALL '+
+         'SELECT away_team_id AS id, away_score AS score FROM results '+
+       ') AS scores '+
+       'GROUP BY id '+
+     ') AS averages '+
+     'WHERE teams.team_id=averages.id;',
     function(err){
-      res.render('error', {message: err.message, error: err});
+      res.render('error', { message: err.message, error: err });
     },
     function(result){
-      res.render('results', {results:result});
-    });
+      res.render('results', { results:result });
+    });     
 });
 
 router.get('/wins-and-losses',  function(req, res, next){
