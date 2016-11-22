@@ -3,7 +3,7 @@ var db = require('../db');
 var router = express.Router();
 
 router.get('/', function(req, res, next) {
-  var query = 'SELECT * FROM managers WHERE deleted != 1;';
+  var query = 'SELECT * FROM managers;';
 
   db.query(query, 
     function(err){
