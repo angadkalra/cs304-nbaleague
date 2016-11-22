@@ -30,8 +30,8 @@ router.get('/view/:attributes/:conditions/:operators/:constraints/:logic', funct
     var logic = req.params["logic"].split('-');
   }
 
-  var sqlQuery = (attributes.length == 2 && attributes[1] == "") ? "SELECT name FROM players WHERE " :
-    "SELECT name, " + attributes.join(", ") + " FROM players WHERE ";
+  var sqlQuery = (attributes.length == 2 && attributes[1] == "") ? "SELECT player_id, name FROM players WHERE " :
+    "SELECT player_id, name, " + attributes.join(", ") + " FROM players WHERE ";
 
   for (var i = 0; i < operators.length; i++) {
     if (operators[i] == "eq")
