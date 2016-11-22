@@ -17,7 +17,7 @@ router.get('/', function(req, res, next) {
 
 router.get('/consistent-teams/:logic/:score', function(req,res,next){
   var aggregateFunction, comparator;
-  if (req.params.logic.startsWith('lt')) {
+  if (req.params.logic.length > 0 && req.params.logic.substr(0, 2) == 'lt') {
     aggregateFunction  = 'MAX';
     comparator = '<';
   } else {
@@ -25,7 +25,7 @@ router.get('/consistent-teams/:logic/:score', function(req,res,next){
     comparator = '>';
   }
 
-  if (req.params.logic.endsWith('e')) {
+  if (req.params.logic.substr(-1, 1) == 'e') {
     comparator += '=';
   }
 
@@ -67,7 +67,7 @@ router.get('/averages', function(req,res,next){
     },
     function(result){
       res.render('results', { results:result });
-    });     
+    });
 });
 
 router.get('/wins-and-losses',  function(req, res, next){
