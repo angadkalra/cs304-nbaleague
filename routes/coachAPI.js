@@ -10,7 +10,7 @@ router.get('/', function(req, res, next) {
       res.render('error', { message: err.message, error: err });
     },
     function(result){
-      res.render('results', { results:result });
+      res.render('results', { results: result });
     });
 });
 
@@ -22,7 +22,7 @@ router.get('/include-deleted', function(req, res, next) {
       res.render('error', { message: err.message, error: err });
     },
     function(result){
-      res.render('results', { results:result });
+      res.render('results', { results: result });
     });
 });
 
