@@ -3,8 +3,12 @@ var db = require('../db.js');
 var router = express.Router();
 
 router.get('/:date?', function(req, res, next) {
-  db.query("SELECT team_plays_team.*, results.home_score, results.away_score FROM team_plays_team LEFT JOIN results " 
-    + "ON team_plays_team.date = results.date " 
+  if (req.params.date == 'blowouts' || req.params.date == 'close-games') {
+    return next();
+  }
+
+  db.query("SELECT team_plays_team.*, results.home_score, results.away_score FROM team_plays_team LEFT JOIN results "
+    + "ON team_plays_team.date = results.date "
     + "AND team_plays_team.home_team_id = results.home_team_id "
     + "AND team_plays_team.away_team_id = results.away_team_id "
     + (req.params.date ? "WHERE team_plays_team.date = '" + req.params.date + "'" : ""),
@@ -17,7 +21,7 @@ router.get('/:date?', function(req, res, next) {
 });
 
 router.get('/add/:date/:home_team_id/:away_team_id', function(req, res, next) {
-  db.query("INSERT INTO team_plays_team (date, home_team_id, away_team_id) " 
+  db.query("INSERT INTO team_plays_team (date, home_team_id, away_team_id) "
     + "VALUES ('" + req.params.date + "'," + req.params.home_team_id + "," + req.params.away_team_id + ")",
     function(err) {
       res.render('error', { message: err.message, error: err });
@@ -35,7 +39,7 @@ router.get('/result/edit/:date/:home_team_id/:away_team_id/:home_score/:away_sco
     error,
     function(results) {
       if (results.length == 0) {
-        db.query("INSERT INTO results (date, home_team_id, away_team_id, home_score, away_score) " 
+        db.query("INSERT INTO results (date, home_team_id, away_team_id, home_score, away_score) "
           + "VALUES ('" + req.params.date + "'," + req.params.home_team_id + "," + req.params.away_team_id + "," + req.params.home_score + "," + req.params.away_score + ")",
           error,
           function(result) {
@@ -68,7 +72,6 @@ router.get('/delete/:date/:home_team_id/:away_team_id', function(req, res, next)
            });
 });
 
-
 router.get('/blowouts', function(req, res, next) {
   db.query("SELECT * FROM results WHERE ABS(home_score-away_score) = (SELECT MAX(ABS(home_score-away_score)) FROM results);",
     function(err) {
@@ -88,4 +91,5 @@ router.get('/close-games', function(req, res, next) {
       res.render('results', { results: result });
     });
 });
+
 module.exports = router;
