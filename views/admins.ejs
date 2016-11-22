@@ -82,7 +82,7 @@
 
     <div class="row">
       <div class="col-md-4">
-        <h3>View Coaches (TODO)</h3>
+        <h3>View Coaches</h3>
 
         <form class="form" id="view-coaches">
           <div class="form-check">
@@ -95,7 +95,7 @@
       </div>
 
       <div class="col-md-4">
-        <h3>View Managers (TODO)</h3>
+        <h3>View Managers</h3>
 
         <form class="form" id="view-managers">
           <div class="form-check">
@@ -112,26 +112,26 @@
 
     <div class="row">
       <div class="col-md-4">
-        <h3>Add Player (TODO)</h3>
-        <form class="form" id="#add-player">
+        <h3>Add Player</h3>
+        <form class="form" id="add-player">
           <div class="form-group">
-            <input type="default" class="form-control" id="insert-player-team-id" placeholder="Team ID">
+            <input type="default" class="form-control" id="add-player-team-id" placeholder="Team ID">
           </div>
           <div class="form-group">
-            <input type="default" class="form-control" id="insert-player-name" placeholder="Name">
+            <input type="default" class="form-control" id="add-player-name" placeholder="Name">
           </div>
           <div class="form-group">
-            <input type="default" class="form-control" id="insert-player-jersey" placeholder="Jersey Number">
+            <input type="default" class="form-control" id="add-player-jersey" placeholder="Jersey Number">
           </div>
           <div class="form-group">
-            <input type="default" class="form-control" id="edit-player-position" placeholder="Position">
+            <input type="default" class="form-control" id="add-player-position" placeholder="Position">
           </div>
           <button type="submit" class="btn btn-primary">Submit</button>
         </form>
       </div>
       <div class="col-md-4">
-        <h3>Add Fixture (TODO)</h3>
-        <form class="form" id="#add-fixture">
+        <h3>Add Fixture</h3>
+        <form class="form" id="add-fixture">
           <div class="form-group">
             <input type="default" class="form-control" id="add-fixture-date" placeholder="Date">
           </div>
@@ -179,7 +179,7 @@
       </div>
       <div class="col-md-4">
         <h3>Update Fixtures</h3>
-        <form class="form" id="#update-fixtures">
+        <form class="form" id="update-fixtures">
           <div class="form-group">
             <input type="default" class="form-control" id="update-fixtures-date" placeholder="Date">
           </div>
@@ -204,18 +204,8 @@
 
     <div class="row">
         <div class="col-md-4">
-            <h3>Delete Player</h3>
-            <form class="form" id="#delete-players">
-              <div class="form-group">
-                <input type="default" class="form-control" id="delete-players-player-id" placeholder="Player ID to Delete">
-              </div>
-              <button type="submit" class="btn btn-primary">Submit</button>
-            </form>
-        </div>
-
-        <div class="col-md-4">
             <h3>Delete Fixture</h3>
-            <form class="form" id="#delete-fixture">
+            <form class="form" id="delete-fixture">
               <div class="form-group">
                 <input type="default" class="form-control" id="delete-fixture-date" placeholder="Date">
               </div>
@@ -259,7 +249,7 @@
     var suspendedVal = ($("#view-players-where-suspended").val() == "1") ? $("#view-players-where-suspended").val() : "0";
     var injuredVal = ($("#view-players-where-injured").val() == "1") ? $("#view-players-where-injured").val() : "0";
 
-    location.href = "/players/" + attrs + "/suspended-injured/eq-eq/" + suspendedVal + "-" + injuredVal + "/and";
+    location.href = "/players/view/" + attrs + "/suspended-injured/eq-eq/" + suspendedVal + "-" + injuredVal + "/and";  
 
     event.preventDefault();
   });
@@ -320,11 +310,65 @@
       event.preventDefault();
   });
 
-  $("#delete-players").submit(function(event) {
-    // TODO: Build up the url based on info from id'd inputs in the form
-    location.href = '/players';
+  $("#add-player-team-id").prop('required', true);
+  $("#add-player-name").prop('required', true);
+  $("#add-player-jersey").prop('required', true);
+  $("#add-player-position").prop('required', true);
+
+  $("#add-player").submit(function(event) {
+      var teamID = $("#add-player-team-id").val();
+      var name = $("#add-player-name").val();
+      var jersey_number = $("#add-player-jersey").val();
+      var position = $("#add-player-position").val();
+      
+      location.href = '/players/add/' + teamID + '/' + name + '/' + jersey_number + '/' + position;
+
+      event.preventDefault();
+  });
+
+  $("#update-fixtures-date").prop('required',true);
+  $("#update-fixtures-hometeam-id").prop('required',true);
+  $("#update-fixtures-awayteam-id").prop('required',true);
+  $("#update-fixtures-hometeam-score").prop('required',true);
+  $("#update-fixtures-awayteam-score").prop('required',true);
+
+  $("#update-fixtures").submit(function(event) {
+    var date = $("#update-fixtures-date").val();
+    var homeTeamID = $("#update-fixtures-hometeam-id").val();
+    var awayTeamID = $("#update-fixtures-awayteam-id").val();
+    var homeScore = $("#update-fixtures-hometeam-score").val();
+    var awayScore = $("#update-fixtures-awayteam-score").val();
+
+    location.href = '/fixtures/result/edit/' + date + '/' + homeTeamID + '/' + awayTeamID + '/' + homeScore + '/'
+      + awayScore;
+
     event.preventDefault();
   });
+
+  $("#add-fixture-date").prop('required',true);
+  $("#add-fixture-hometeam-id").prop('required',true);
+  $("#add-fixture-awayteam-id").prop('required',true);
+
+  $("#add-fixture").submit(function(event) {
+    var date = $("#add-fixture-date").val();
+    var homeTeamID = $("#add-fixture-hometeam-id").val();
+    var awayTeamID = $("#add-fixture-awayteam-id").val();
+
+    location.href = '/fixtures/add/' + date + '/' + homeTeamID + '/' + awayTeamID;
+
+    event.preventDefault();
+  });
+
+  $("#delete-fixture").submit(function(event) {
+    var date = $("#delete-fixture-date").val();
+    var homeTeamID = $("#delete-fixture-hometeam-id").val();
+    var awayTeamID = $("#delete-fixture-awayteam-id").val();
+
+    location.href = '/fixtures/delete/' + date + '/' + homeTeamID + '/' + awayTeamID;
+
+    event.preventDefault();
+  });
+
   </script>
 </body>
 </html>

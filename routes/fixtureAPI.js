@@ -64,7 +64,9 @@ router.get('/delete/:date/:home_team_id/:away_team_id', function(req, res, next)
            "WHERE date = '"+req.params.date+"' "+
 	   "AND home_team_id = " + req.params.home_team_id + " "+
            "AND away_team_id = " + req.params.away_team_id,
-           error,
+           function(err) {
+              res.render('error', { message: err.message, error: err });
+            },
            function(result) {
              res.redirect('/fixtures');
            });

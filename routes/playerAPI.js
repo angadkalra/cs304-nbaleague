@@ -12,7 +12,7 @@ router.get('/', function(req, res, next) {
     });
 });
 
-router.get('/:attributes/:conditions/:operators/:constraints/:logic', function(req, res, next) {
+router.get('/view/:attributes/:conditions/:operators/:constraints/:logic', function(req, res, next) {
 
   // these are the attributes we want to include in query
   var attributes = req.params["attributes"].split('-');
@@ -77,7 +77,26 @@ router.get('/update/:teamID/:playerID/:jerseyNum/:position/:suspended/:injured',
 
   console.log(sqlQuery);
 
-  db.query(sqlQuery,
+  db.query(sqlQuery, 
+    function(err) {
+      console.log(err);
+    },
+    function(result) {
+      res.redirect('/players');
+    }
+  );
+
+});
+
+router.get('/add/:teamID/:name/:jerseyNum/:position', function(req, res, next) {
+  var teamID = req.params["teamID"];
+  var name = req.params["name"];
+  var jerseyNum = req.params["jerseyNum"];
+  var position = req.params["position"];
+
+  var sqlQuery = "INSERT INTO players (team_id, name, jersey_number, position) VALUES (" + teamID + ',' + name + ',' + jerseyNum + ',' + position + ');';
+ 
+  db.query(sqlQuery, 
     function(err) {
       res.render('error', { message: err.message, error: err });
     },
