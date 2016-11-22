@@ -312,6 +312,8 @@
         event.preventDefault();
     });
 
+    $("#view-consistent-teams-score").prop('required',true);
+
     $("#view-consistent-teams").submit(function(event) {
         location.href = '/teams/consistent-teams/' + $("#view-consistent-teams-comparator").val() + '/' + $("#view-consistent-teams-score").val();
         event.preventDefault();
@@ -360,31 +362,19 @@
   });
 
   $("#view-teams").submit(function(event) {
-    if ($("#view-teams-deleted:checked").val()) {
-        location.href = '/teams/include-deleted'
-    } else {
-        location.href = '/teams';
-    }
+    location.href = '/teams';
 
     event.preventDefault();
   });
 
   $("#view-coaches").submit(function(event) {
-    if ($("#view-coaches-deleted:checked").val()) {
-        location.href = '/coaches/include-deleted'
-    } else {
-        location.href = '/coaches';
-    }
+    location.href = '/coaches';
 
     event.preventDefault();
   });
 
   $("#view-managers").submit(function(event) {
-    if ($("#view-managers-deleted:checked").val()) {
-        location.href = '/managers/include-deleted'
-    } else {
-        location.href = '/managers';
-    }
+    location.href = '/managers';
 
     event.preventDefault();
   });
@@ -463,6 +453,8 @@
 
     event.preventDefault();
   });
+
+  $("#delete-fixture-date").prop('required',true);
 
   $("#delete-fixture").submit(function(event) {
     var date = $("#delete-fixture-date").val();
