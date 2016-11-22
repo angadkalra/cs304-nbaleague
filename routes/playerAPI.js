@@ -5,7 +5,7 @@ var router = express.Router();
 router.get('/', function(req, res, next) {
   db.query("SELECT * FROM players;",
     function(err) {
-      console.log(err);
+      res.render("error", {message: err.message, error: err});
     },
     function(result) {
       res.render('results', { results: result });
@@ -47,7 +47,7 @@ router.get('/view/:attributes/:conditions/:operators/:constraints/:logic', funct
 
   db.query(sqlQuery,
     function(err) {
-      console.log(err);
+      res.render("error", {message: err.message, error: err});
     },
     function(result) {
       res.render('results', { results: result });
@@ -79,7 +79,7 @@ router.get('/update/:teamID/:playerID/:jerseyNum/:position/:suspended/:injured',
 
   db.query(sqlQuery, 
     function(err) {
-      console.log(err);
+      res.render("error", {message: err.message, error: err});
     },
     function(result) {
       res.redirect('/players');
@@ -90,21 +90,35 @@ router.get('/update/:teamID/:playerID/:jerseyNum/:position/:suspended/:injured',
 
 router.get('/add/:teamID/:name/:jerseyNum/:position', function(req, res, next) {
   var teamID = req.params["teamID"];
-  var name = req.params["name"];
+  var playerName = decodeURIComponent(req.params["name"]);
   var jerseyNum = req.params["jerseyNum"];
-  var position = req.params["position"];
+  var pos = req.params["position"];
 
-  var sqlQuery = "INSERT INTO players (team_id, name, jersey_number, position) VALUES (" + teamID + ',' + name + ',' + jerseyNum + ',' + position + ');';
+  var sqlQuery = "INSERT INTO players (team_id, name, jersey_number, position) VALUES (" + teamID + ',' + "'" + playerName + "'" + ',' + 
+    jerseyNum + ',' + pos + ');';
  
   db.query(sqlQuery, 
     function(err) {
-      console.log(err);
+      res.render("error", {message: err.message, error: err});
     },
     function(result) {
       res.redirect('/players');
     }
   );
 
+});
+
+router.get('/delete/:playerID', function(req, res, next) {
+  var playerID = req.params.playerID;
+
+  db.query("delete from players where player_id = " + playerID + ";",
+    function(err) {
+      res.render("error", {message: err.message, error: err});
+    },
+    function(result) {
+      res.redirect('/players');
+    }
+  );
 });
 
 module.exports = router;

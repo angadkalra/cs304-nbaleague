@@ -209,6 +209,15 @@
     <% if (level =="admins"){%>
     <div class="row">
         <div class="col-md-4">
+            <h3>Delete Player</h3>
+            <form class="form" id="delete-player">
+              <div class="form-group">
+                <input type="default" class="form-control" id="delete-player-player-id" placeholder="Player ID">
+              </div>
+              <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+        </div>
+        <div class="col-md-4">
             <h3>Delete Fixture</h3>
             <form class="form" id="delete-fixture">
               <div class="form-group">
@@ -381,6 +390,16 @@
       var position = $("#add-player-position").val();
       
       location.href = '/players/add/' + teamID + '/' + name + '/' + jersey_number + '/' + position;
+
+      event.preventDefault();
+  });
+
+  $("#delete-player-player-id").prop('required',true);
+
+  $("#delete-player").submit(function(event) {
+      var playerID = $("#delete-player-player-id").val();
+      
+      location.href = '/players/delete/' + playerID;
 
       event.preventDefault();
   });
