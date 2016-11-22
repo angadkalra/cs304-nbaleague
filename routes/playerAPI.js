@@ -47,11 +47,7 @@ router.get('/view/:attributes/:conditions/:operators/:constraints/:logic', funct
 
   db.query(sqlQuery,
     function(err) {
-<<<<<<< HEAD
       res.render('error', { message: err.message, error: err });
-=======
-      res.render("error", {message: err.message, error: err});
->>>>>>> b547f5f15f2b40b9e9e9a51d1a6274ba5e0f4fff
     },
     function(result) {
       res.render('results', { results: result });
